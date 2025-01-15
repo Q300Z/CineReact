@@ -30,21 +30,13 @@ const GlobalProvider = ({children}) => {
     // Vérifie si un film est dans la wishlist
     const isInWishlist = (movie) => wishlist.some((m) => m.id === movie.id);
 
-    const debounce =(func, timeout = 300)=>{
-        let timer;
-        return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => { func.apply(this, args); }, timeout);
-        };
-    }
-
 
     return (
         <GlobalContext.Provider value={{
             token, setToken,
             wishlist,
             onAddWishlist, onRemoveWishlist,
-            isInWishlist, debounce
+            isInWishlist,
         }}>
             {children}
         </GlobalContext.Provider>

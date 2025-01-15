@@ -1,0 +1,38 @@
+/* SearchBar.module.css */
+.search_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+.select {
+    margin-left: 15px;
+}
+
+.select select {
+    width: fit-content;
+    padding: 5px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.select select:focus {
+    outline: none;
+}
+
+.input {
+}
+
+.input input {
+    width: fit-content;
+    padding: 8px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+}
+

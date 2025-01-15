@@ -1,0 +1,62 @@
+.container {
+    padding: 20px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.movie_title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.movie_overview {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.movie_poster {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.movie_info {
+    margin-bottom: 10px;
+}
+
+.actors_list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.actors_list li {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.add_to_wishlist_btn {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.add_to_wishlist_btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.similar_movies_title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}

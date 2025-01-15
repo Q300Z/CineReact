@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useGlobal } from "../contexts/GlobalContext.jsx";
-import {Link, useParams} from "react-router";
+import { Link, useParams } from "react-router";
+import MovieList from "./MovieList.jsx";
+import styles from './MovieDetail.module.css';
 
-const MovieDetails = () => {
+const MovieDetail = () => {
     const { id } = useParams();
     const { token, onAddWishlist, isInWishlist } = useGlobal();
     const [movie, setMovie] = useState(null);
@@ -55,24 +57,25 @@ const MovieDetails = () => {
     }
 
     if (!movie) {
-        return <p>Chargement des détails...</p>;
+        return <p className={styles.container}>Chargement des détails...</p>;
     }
 
     return (
-        <div>
-            <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
+        <div className={styles.container}>
+            <h1 className={styles.movie_title}>{movie.title}</h1>
+            <p className={styles.movie_overview}>{movie.overview}</p>
             {movie.poster_path && (
                 <img
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={movie.title}
+                    className={styles.movie_poster}
                 />
             )}
-            <p>Date de sortie : {movie.release_date}</p>
-            <p>Note moyenne : {movie.vote_average}</p>
+            <p className={styles.movie_info}>Date de sortie : {movie.release_date}</p>
+            <p className={styles.movie_info}>Note moyenne : {movie.vote_average}</p>
 
-            <h3>Acteurs principaux</h3>
-            <ul>
+            <h3 className={styles.actors}>Acteurs principaux</h3>
+            <ul className={styles.actors_list}>
                 {cast.map((actor) => (
                     <li key={actor.cast_id}>
                         {actor.name} - {actor.character}
@@ -84,53 +87,15 @@ const MovieDetails = () => {
                 type="button"
                 onClick={() => onAddWishlist(movie)}
                 disabled={isInWishlist(movie)}
-                style={{
-                    padding: "10px",
-                    marginTop: "20px",
-                    backgroundColor: isInWishlist(movie) ? "gray" : "#007BFF",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: isInWishlist(movie) ? "not-allowed" : "pointer",
-                }}
+                className={styles.add_to_wishlist_btn}
             >
                 {isInWishlist(movie) ? "Déjà dans la wishlist" : "Ajouter à la wishlist"}
             </button>
 
-            <h3>Films similaires</h3>
-            {similarMovies.length === 0 ? (
-                <p>Aucun film similaire trouvé.</p>
-            ) : (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
-                    {similarMovies.map((similarMovie) => (
-                        <div
-                            key={similarMovie.id}
-                            style={{
-                                border: "1px solid #ccc",
-                                padding: "10px",
-                                width: "200px",
-                                textAlign: "center",
-                            }}
-                        >
-                            <h4>{similarMovie.title}</h4>
-                            {similarMovie.poster_path && (
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w200/${similarMovie.poster_path}`}
-                                    alt={similarMovie.title}
-                                    style={{ width: "100%" }}
-                                />
-                            )}
-                            <Link
-                                to={`/movie/${similarMovie.id}`}
-                                style={{ color: "#007BFF", textDecoration: "none", marginTop: "10px", display: "block" }}
-                            >
-                                Voir les détails
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            )}
+            <h3 className={styles.similarMoviesTitle}>Films similaires</h3>
+            <MovieList listMovie={similarMovies} />
         </div>
     );
 };
-export default MovieDetails;
+
+export default MovieDetail;

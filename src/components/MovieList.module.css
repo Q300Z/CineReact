@@ -1,0 +1,66 @@
+.container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie_card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.movie_card:hover {
+    transform: scale(1.05);
+}
+
+.movie_title {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.movie_poster {
+    border-radius: 8px;
+    width: 100%;
+    max-height: 278px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.no_image {
+    border-radius: 8px;
+    height: 278px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gainsboro;
+    color: #555;
+}
+
+.movie_rating {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.details_link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.details_link:hover {
+    background-color: #0056b3;
+}
