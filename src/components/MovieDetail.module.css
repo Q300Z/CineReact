@@ -1,62 +1,112 @@
+/* MovieDetail.module.css */
+
 .container {
     padding: 20px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: 'Arial', sans-serif;
 }
 
-.header {
-    margin-bottom: 20px;
+.movie_title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-.movie_title {
-    font-size: 2rem;
-    margin-bottom: 10px;
+.movie_poster {
+    width: 300px;
+    height: auto;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: #acabab 2px 2px 5px;
+    transition: transform 200ms ease;
+}
+
+.movie_poster:hover {
+    transform: scale(1.1);
+    box-shadow: #acabab 5px 5px 5px;
+}
+
+.movie_detail_content{
+    justify-items: center;
 }
 
 .movie_overview {
     font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-.movie_poster {
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
+    margin: 20px 0;
+    max-width: 700px;
+    text-align: justify;
 }
 
 .movie_info {
-    margin-bottom: 10px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.actors {
+    margin-top: 30px;
+    font-size: 1.8rem;
 }
 
 .actors_list {
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
 }
 
 .actors_list li {
-    background-color: #f1f1f1;
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 
 .add_to_wishlist_btn {
-    padding: 10px;
     background-color: #007BFF;
-    color: white;
     border: none;
+    padding: 10px 15px;
     border-radius: 5px;
-    cursor: pointer;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 .add_to_wishlist_btn:disabled {
-    background-color: gray;
+    background-color: #888;
     cursor: not-allowed;
 }
 
-.similar_movies_title {
+.similarMoviesTitle {
     margin-top: 30px;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.similarMoviesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.similarMoviesItem {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.similarMoviesItem img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.similarMoviesItem h4 {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1rem;
 }

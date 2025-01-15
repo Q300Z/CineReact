@@ -9,31 +9,29 @@ const SearchBar = ({ onUrlApi }) => {
 
     // Liste des filtres
     const listFilter = [
-        { name: "Popular", value: "https://api.themoviedb.org/3/movie/popular" },
-        { name: "Top Rated", value: "https://api.themoviedb.org/3/movie/top_rated" },
-        { name: "Upcoming", value: "https://api.themoviedb.org/3/movie/upcoming" },
-        { name: "Now Playing", value: "https://api.themoviedb.org/3/movie/now_playing" },
+        { name: "Populaire", value: "https://api.themoviedb.org/3/movie/popular?language=fr-FR&region=FR" },
+        { name: "Les mieux notés", value: "https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&region=FR" },
+        { name: "À venir", value: "https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&region=FR" },
+        { name: "En cours de diffusion", value: "https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&region=FR" },
     ];
 
     // Gestion de la sélection du filtre
     const onSelectFilter = (event) => {
-        onUrlApi(event.target.value + `?api_key=${token}`);
-        setLastSelect(event.target.value + `?api_key=${token}`);
+        onUrlApi(event.target.value + `&api_key=${token}`);
+        setLastSelect(event.target.value + `&api_key=${token}`);
     };
 
     // Gestion du champ de recherche
     const onSearchChange = (event) => {
         setSearchTerm(event.target.value);
         if (event.target.value !== "")
-            onUrlApi(`https://api.themoviedb.org/3/search/movie?api_key=${token}&query=${event.target.value}`);
+            onUrlApi(`https://api.themoviedb.org/3/search/movie?language=fr-FR&region=FR&api_key=${token}&query=${event.target.value}`);
         else
             onUrlApi(lastSelect);
     };
 
     return (
         <div className={styles.search_bar}>
-
-
             {/* Champ de recherche */}
             <div className={styles.input}>
                 <input

@@ -15,7 +15,7 @@ const MovieDetail = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${token}`);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${token}&language=fr-FR&region=FR`);
                 if (!response.ok) throw new Error("Erreur lors de la récupération des détails du film.");
                 const data = await response.json();
                 setMovie(data);
@@ -26,7 +26,7 @@ const MovieDetail = () => {
 
         const fetchMovieCast = async () => {
             try {
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${token}`);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${token}&language=fr-FR&region=FR`);
                 if (!response.ok) throw new Error("Erreur lors de la récupération des acteurs.");
                 const data = await response.json();
                 setCast(data.cast.slice(0, 10)); // Limite aux 10 premiers acteurs
@@ -37,7 +37,7 @@ const MovieDetail = () => {
 
         const fetchSimilarMovies = async () => {
             try {
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${token}`);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${token}&language=fr-FR&region=FR`);
                 if (!response.ok) throw new Error("Erreur lors de la récupération des films similaires.");
                 const data = await response.json();
                 setSimilarMovies(data.results);
@@ -62,17 +62,32 @@ const MovieDetail = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.movie_title}>{movie.title}</h1>
-            <p className={styles.movie_overview}>{movie.overview}</p>
-            {movie.poster_path && (
-                <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={movie.title}
-                    className={styles.movie_poster}
-                />
-            )}
-            <p className={styles.movie_info}>Date de sortie : {movie.release_date}</p>
-            <p className={styles.movie_info}>Note moyenne : {movie.vote_average}</p>
+            <div className={styles.movie_detail_container}>
+                <h1 className={styles.movie_title}>{movie.title}</h1>
+                <div className={styles.movie_detail_content}>
+                    {movie.poster_path && (
+                        <img
+                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                            alt={movie.title}
+                            className={styles.movie_poster}
+                        />
+                    )}
+                    <div>
+                        <p className={styles.movie_overview}>{movie.overview}</p>
+                        <p className={styles.movie_info}>Date de sortie : {movie.release_date}</p>
+                        <p className={styles.movie_info}>Note moyenne : {movie.vote_average}</p>
+
+                        <button
+                            type="button"
+                            onClick={() => onAddWishlist(movie)}
+                            disabled={isInWishlist(movie)}
+                            className={styles.add_to_wishlist_btn}
+                        >
+                            {isInWishlist(movie) ? "Déjà dans la wishlist" : "Ajouter à la wishlist"}
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <h3 className={styles.actors}>Acteurs principaux</h3>
             <ul className={styles.actors_list}>
@@ -83,17 +98,10 @@ const MovieDetail = () => {
                 ))}
             </ul>
 
-            <button
-                type="button"
-                onClick={() => onAddWishlist(movie)}
-                disabled={isInWishlist(movie)}
-                className={styles.add_to_wishlist_btn}
-            >
-                {isInWishlist(movie) ? "Déjà dans la wishlist" : "Ajouter à la wishlist"}
-            </button>
-
             <h3 className={styles.similarMoviesTitle}>Films similaires</h3>
-            <MovieList listMovie={similarMovies} />
+            <div className={styles.similarMoviesList}>
+                <MovieList listMovie={similarMovies} />
+            </div>
         </div>
     );
 };
