@@ -10,12 +10,12 @@ const Navbar = () => {
         <ul>
             <li>
                 <a href="/" className={location.pathname === '/' ? styles.active : ''}>
-                    Home
+                    Accueil
                 </a>
             </li>
             <li>
                 <a href="/wishlist" className={location.pathname === '/wishlist' ? styles.active : ''}>
-                    Wishlist ({wishlist.length})
+                    Liste de souhaits ({wishlist.length})
                 </a>
             </li>
         </ul>
