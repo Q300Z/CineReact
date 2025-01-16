@@ -7,7 +7,7 @@ const WISHLIST_STORAGE_KEY = 'movieWishlist';
 
 // Fournisseur du contexte
 const GlobalProvider = ({children}) => {
-    const [token, setToken] = useState("9995ccfe9d6d3c53afa2cbc8530a25f5"); // Token API
+    const [token, setToken] = useState(import.meta.env.VITE_API_KEY); // Token API
     const [wishlist, setWishlist] = useState(() => {
         const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
         return savedWishlist ? JSON.parse(savedWishlist) : [];

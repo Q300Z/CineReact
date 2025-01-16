@@ -39,8 +39,9 @@ function Index() {
 
     // Fetch des données
     useEffect(() => {
+        handlerCallback()
         const timer = setTimeout(() => {
-            handlerCallback()
+
         }, 500);
 
         return () => {

@@ -1,18 +1,21 @@
-import { useState } from "react";
-import { useGlobal } from "../contexts/GlobalContext.jsx";
+import {useState} from "react";
+import {useGlobal} from "../contexts/GlobalContext.jsx";
 import styles from './SearchBar.module.css';
 
-const SearchBar = ({ onUrlApi }) => {
+const SearchBar = ({onUrlApi}) => {
     const [searchTerm, setSearchTerm] = useState("");  // Etat pour la recherche
     const [lastSelect, setLastSelect] = useState("");  // Etat pour la recherche
-    const { token } = useGlobal();
+    const {token} = useGlobal();
 
     // Liste des filtres
     const listFilter = [
-        { name: "Populaire", value: "https://api.themoviedb.org/3/movie/popular?language=fr-FR&region=FR" },
-        { name: "Les mieux notés", value: "https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&region=FR" },
-        { name: "À venir", value: "https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&region=FR" },
-        { name: "En cours de diffusion", value: "https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&region=FR" },
+        {name: "Populaire", value: "https://api.themoviedb.org/3/movie/popular?language=fr-FR&region=FR"},
+        {name: "Les mieux notés", value: "https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&region=FR"},
+        {name: "À venir", value: "https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&region=FR"},
+        {
+            name: "En cours de diffusion",
+            value: "https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&region=FR"
+        },
     ];
 
     // Gestion de la sélection du filtre
@@ -21,13 +24,19 @@ const SearchBar = ({ onUrlApi }) => {
         setLastSelect(event.target.value + `&api_key=${token}`);
     };
 
+    let timer = ""
     // Gestion du champ de recherche
     const onSearchChange = (event) => {
+        clearInterval(timer)
         setSearchTerm(event.target.value);
-        if (event.target.value !== "")
-            onUrlApi(`https://api.themoviedb.org/3/search/movie?language=fr-FR&region=FR&api_key=${token}&query=${event.target.value}`);
-        else
-            onUrlApi(lastSelect);
+        timer = setTimeout(() => {
+
+            if (event.target.value !== "")
+                onUrlApi(`https://api.themoviedb.org/3/search/movie?language=fr-FR&region=FR&api_key=${token}&query=${event.target.value}`);
+            else
+                onUrlApi(lastSelect);
+        }, 500)
+
     };
 
     return (
