@@ -25,6 +25,10 @@ jobs:
     # Spécifie le système d'exploitation utilisé pour exécuter le workflow
     runs-on: ubuntu-latest
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     # Liste des étapes du job
     steps:
       # 1. Vérification du dépôt GitHub
