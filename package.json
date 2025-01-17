@@ -1,8 +1,13 @@
 {
-  "name": "firstreact",
+  "name": "CineReact",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Q300Z",
+  "bugs": "https://github.com/Q300Z/CineReact/issues",
+  "homepage": "https://q300z.github.io/CineReact/",
+  "repository": "https://github.com/Q300Z/CineReact",
+  "keywords": ["React", "TP", "Cesi", "Github Page","Film", "TMDB"],
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
