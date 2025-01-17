@@ -1,49 +1,72 @@
+# Nom du workflow, visible dans l'onglet Actions
 name: Deploy React App to GitHub Pages
 
+# Déclencheur du workflow
 on:
   push:
+    # Déclencher le workflow lorsque des modifications sont poussées dans la branche `main`
     branches:
-      - main  # Déclencher l'action sur les push dans la branche main
+      - main
 
+# Permissions nécessaires pour que le workflow puisse déployer sur GitHub Pages
+permissions:
+  contents: read    # Lire le contenu du repository
+  pages: write      # Publier sur GitHub Pages
+  id-token: write   # Authentification sécurisée via OIDC
+
+# Définir des règles de concurrence pour éviter des déploiements multiples simultanés
+concurrency:
+  group: 'pages'           # Identifier ce workflow par groupe
+  cancel-in-progress: true # Annuler tout déploiement en cours si un nouveau commence
+
+# Définition des jobs du workflow
 jobs:
   build-and-deploy:
+    # Spécifie le système d'exploitation utilisé pour exécuter le workflow
     runs-on: ubuntu-latest
 
+    # Liste des étapes du job
     steps:
-      # 1. Vérifiez le code source
+      # 1. Vérification du dépôt GitHub
       - name: Checkout repository
         uses: actions/checkout@v3
+        # Permet de récupérer les fichiers du dépôt
 
-      # 2. Installez Node.js
+      # 2. Configuration de Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 22  # Utiliser Node.js version 22
+          # Cache des dépendances pour accélérer les builds
+          cache: npm
 
-      # 3. Installer les dépendances
+      # 3. Installation des dépendances du projet
       - name: Install dependencies
         run: npm install
+        # Utilise le fichier package.json pour installer toutes les dépendances
 
-      # 4. Ajouter la clé API à l’environnement
+      # 4. Configuration des variables d'environnement
       - name: Set environment variables
         run: echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> $GITHUB_ENV
+        # Ajoute la clé API sécurisée à l'environnement pour qu'elle soit disponible lors du build
 
-      # 5. Construire le projet
+      # 5. Construction de l'application React
       - name: Build project
         run: npm run build
+        # Compile le projet et génère les fichiers statiques dans le dossier `build`
 
-      # 6. Configurer GitHub Pages
+      # 6. Configuration pour le déploiement GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        # Prépare l'environnement pour le déploiement sur Pages
 
-      # 7. Télécharger les fichiers de production
+      # 7. Téléversement des fichiers générés
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload dist folder
-          path: './dist'
-          
-      # 8. Déployer sur GitHub Pages
+          path: './build' # Spécifie le dossier contenant les fichiers à déployer (React génère dans `build`)
+
+      # 8. Déploiement sur GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-    
+        # Publie les fichiers sur GitHub Pages
