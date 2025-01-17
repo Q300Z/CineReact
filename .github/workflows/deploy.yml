@@ -38,7 +38,7 @@ jobs:
 
       # 7. Télécharger les fichiers de production
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
           path: './dist'
