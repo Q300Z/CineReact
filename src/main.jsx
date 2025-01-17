@@ -6,7 +6,7 @@ import GlobalProvider from "./contexts/GlobalContext.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="/CineReact">
             <GlobalProvider>
                 <App/>
             </GlobalProvider>
