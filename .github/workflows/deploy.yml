@@ -32,9 +32,18 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # 6. Déployer sur GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      # 6. Configurer GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # 7. Télécharger les fichiers de production
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          # Upload dist folder
+          path: './dist'
+          
+      # 8. Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+    
