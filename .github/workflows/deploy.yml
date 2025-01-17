@@ -64,7 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './build' # Spécifie le dossier contenant les fichiers à déployer (React génère dans `build`)
+          path: './dist' # Spécifie le dossier contenant les fichiers à déployer (React génère dans `build`)
 
       # 8. Déploiement sur GitHub Pages
       - name: Deploy to GitHub Pages
