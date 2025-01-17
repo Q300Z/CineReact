@@ -1,5 +1,5 @@
 {
-  "name": "CineReact",
+  "name": "cinereact",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -12,7 +12,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
